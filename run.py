@@ -1,14 +1,14 @@
 from EchoLayer import EchoLayer
-from yowsup.layers.auth import YowCryptLayer, YowAuthenticationProtocolLayer
-from yowsup.layers.coder import YowCoderLayer
-from yowsup.layers.network import YowNetworkLayer
+from yowsup.layers.auth import YowAuthenticationProtocolLayer
 from yowsup.layers.protocol_messages import YowMessagesProtocolLayer
-from yowsup.layers.stanzaregulator import YowStanzaRegulator
 from yowsup.layers.protocol_receipts import YowReceiptProtocolLayer
 from yowsup.layers.protocol_acks import YowAckProtocolLayer
+from yowsup.layers.network import YowNetworkLayer
+from yowsup.layers.coder import YowCoderLayer
 from yowsup.stacks import YowStack
 from yowsup.common import YowConstants
 from yowsup.layers import YowLayerEvent
+from yowsup.stacks import YowStack, YOWSUP_CORE_LAYERS
 from yowsup import env
 
 # FIXME Replace with proper phone and password
@@ -17,12 +17,8 @@ CREDENTIALS = ("phone", "password")
 if __name__ == "__main__":
     layers = (
         EchoLayer,
-        (YowAuthenticationProtocolLayer, YowMessagesProtocolLayer, YowReceiptProtocolLayer, YowAckProtocolLayer),
-        YowCoderLayer,
-        YowCryptLayer,
-        YowStanzaRegulator,
-        YowNetworkLayer
-    )
+        (YowAuthenticationProtocolLayer, YowMessagesProtocolLayer, YowReceiptProtocolLayer, YowAckProtocolLayer)
+    ) + YOWSUP_CORE_LAYERS
     
     stack = YowStack(layers)
     # Setting credentials
