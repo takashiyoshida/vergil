@@ -11,10 +11,22 @@ from yowsup.layers import YowLayerEvent
 from yowsup.stacks import YowStack, YOWSUP_CORE_LAYERS
 from yowsup import env
 
-# FIXME Replace with proper phone and password
-CREDENTIALS = ("phone", "password")
+import json
+
+#
+# getCredentials
+# - Get login information from a JSON file
+#
+def getCredentials(configFile):
+    credentials = None
+    with open(configFile, 'r') as config:
+        data = json.load(config)
+        credentials = (data['phone'].encode('ascii'), data['password'].encode('ascii'))
+    return credentials
 
 if __name__ == "__main__":
+    CREDENTIALS = getCredentials("vergil.conf")
+    
     layers = (
         EchoLayer,
         (YowAuthenticationProtocolLayer, YowMessagesProtocolLayer, YowReceiptProtocolLayer, YowAckProtocolLayer)
