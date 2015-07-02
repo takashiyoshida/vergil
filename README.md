@@ -2,7 +2,7 @@
 
 ## Updates (June 30, 2015)
 
-- Read login information from a JSON file
+- Read login information from a JSON file 
 
 ## Updates (June 24, 2015)
 
