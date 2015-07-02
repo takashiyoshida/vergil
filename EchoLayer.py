@@ -6,6 +6,8 @@ class EchoLayer(YowInterfaceLayer):
 
     @ProtocolEntityCallback("message")
     def onMessage(self, messageProtocolEntity):
+        print messageProtocolEntity
+        
         if True:
             receipt = OutgoingReceiptProtocolEntity(messageProtocolEntity.getId(), messageProtocolEntity.getFrom(), 'read', messageProtocolEntity.getParticipant())
         
@@ -13,6 +15,8 @@ class EchoLayer(YowInterfaceLayer):
                 messageProtocolEntity.getBody(),
                 to = messageProtocolEntity.getFrom()
             )
+            
+            print outgoingMessageProtocolEntity
         
             self.toLower(receipt)
             self.toLower(outgoingMessageProtocolEntity)
